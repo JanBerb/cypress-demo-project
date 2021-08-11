@@ -35,9 +35,9 @@ const dsicPercent = disc * 100;
 describe('Validation test for discount implementation', () => {
 
     it('Checks if the discounted item in women category is correctly implemented in cart.', () => {
-        homePage.navigate(pageUrl);
-        homePage.chooseFromMenu(itemCategory);
-        womenCat.chooseItem(itemName);
+        homePage.navigate(pageUrl); //visits website
+        homePage.chooseFromMenu(itemCategory); //choosing category from menu
+        womenCat.chooseItem(itemName); //choosing item from women category
         itemPage.checkDicount(dsicPercent, oldPriceStr, newPriceStr);
         itemPage.addToCart(checkout);
         cartPage.checkProducts(productQantityStr);
