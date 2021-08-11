@@ -17,7 +17,7 @@ const cartPage = new CartPage;
 const pageUrl = 'http://automationpractice.com/index.php'; // shop url
 const itemCategory = 'Women'; // category choosed from menu (Women/Dresses/T-Shirt)
 const itemName = 'Printed Chiffon Dress'; // name of discounted item
-const productQantityStr = '1'; //how many products should be in the cart
+const productQuantityStr = '1'; //how many products should be in the cart
 const checkout = true; //checkout after adding one item to the cart
 const accountMail = 'qaz@example.com';
 const accountPass = 'qwert12345';
@@ -32,31 +32,22 @@ const newPriceStr = newPrice.toFixed(2).toString();
 const dsicPercent = disc * 100;
 
 
-describe('Validation test for discount implementation', () => {
+describe('TC01:  Validating discount implementation - ordering discounted product', () => {
 
-    it('Checks if the discounted item from category is correctly implemented in cart.', () => {
+    it('Checks if new price is the same in every step of ordering the discounted product.', () => {
         homePage.navigate(pageUrl); //visiting website
         homePage.chooseFromMenu(itemCategory); //choosing category from menu
         womenCat.chooseItem(itemName); //choosing item from category
-        itemPage.checkDicount(dsicPercent, oldPriceStr, newPriceStr); //checking if dsicount and prices are equal to variables
+        itemPage.checkDicount(dsicPercent, oldPriceStr, newPriceStr); //checking if dsicount and prices are equal to assumed values
         itemPage.addToCart(checkout); //adding to cart, navigating to checkout when checkout == true
-        cartPage.checkProducts(productQantityStr); //checking if products qantity in cart is equal to assumed qantity
+        cartPage.checkProducts(productQuantityStr); //checking if products qantity in cart is equal to assumed qantity
         cartPage.checkTotalProductPrice(newPriceStr); //checking if total product price is equal to discounted price
-    });
-
-    it('Checks if the discounted item has similar price at the begining of checkout and before payment', () => {
-        homePage.navigate(pageUrl);
-        homePage.chooseFromMenu(itemCategory);
-        womenCat.chooseItem(itemName);
-        itemPage.addToCart(checkout);
-        cartPage.checkProducts(productQantityStr);
-        cartPage.checkTotalProductPrice(newPriceStr);
         cartPage.nextStep(); // going to next step of checkout
         cartPage.signIn(accountMail, accountPass); //signing in using email and password from variables
         cartPage.nextStep();
-        cartPage.tickTos(); //ticking (check();) checkbox terms of service
+        cartPage.tickTos(); //ticking (.check();) checkbox terms of service
         cartPage.nextStep();
         cartPage.checkTotalProductPrice(newPriceStr);
-    })
+    });
 
 });

@@ -1,8 +1,8 @@
 export class CartPage {
 
     //checking if products qantity in cart is equal to assumed qantity
-    checkProducts(qantity) {
-        cy.get('#summary_products_quantity').should('contain', qantity);
+    checkProducts(quantity) {
+        cy.get('#summary_products_quantity').should('contain', quantity);
     }
 
     //checking if total product price is equal to discounted price
