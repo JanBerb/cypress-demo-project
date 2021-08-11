@@ -7,6 +7,7 @@ export class ItemPage {
         cy.get('#our_price_display').should('contain', newPrice);
     }
 
+    //adding to cart, navigating to checkout when checkout == true
     addToCart(checkout) {
         cy.get('.exclusive > span').click();
         if (checkout == true) {
